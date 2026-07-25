@@ -780,13 +780,23 @@ button.secondary:hover:not(:disabled) {
     <div class="floating-item">🏵️</div>
 </div>
 
+<!-- Modal for Accept Message -->
+<div id="acceptModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-emoji">💙✨💙</div>
+        <h2>Thank You!</h2>
+        <p>Thank you for celebrating this special moment with us. Your presence will make our day even more meaningful. We can't wait to see you and share lots of smiles, laughter, and unforgettable memories.</p>
+        <button class="modal-close-btn" onclick="closeAcceptModal()">Close</button>
+    </div>
+</div>
+
 <!-- Modal for Decline Message -->
 <div id="declineModal" class="modal">
     <div class="modal-content">
         <div class="modal-emoji">😊</div>
         <h2>We'll Miss You!</h2>
         <p>Hope to celebrate with you in another time 🎉</p>
-        <button class="modal-close-btn" onclick="closeModal()">Close</button>
+        <button class="modal-close-btn" onclick="closeDeclineModal()">Close</button>
     </div>
 </div>
 
@@ -1011,11 +1021,15 @@ button.secondary:hover:not(:disabled) {
 <script>
 
 function acceptInvite() {
-    document.getElementById("message").innerHTML = 
-    "✨ Thank you! We look forward to seeing you. ✨";
+    // Show the accept modal
+    document.getElementById("acceptModal").style.display = "block";
     
-    // Disable button
-    event.target.disabled = true;
+    // Disable buttons
+    document.querySelectorAll('.buttons-container button').forEach(btn => {
+        btn.disabled = true;
+    });
+    
+    // Create confetti
     createConfetti();
 }
 
@@ -1029,15 +1043,24 @@ function declineInvite() {
     });
 }
 
-function closeModal() {
+function closeAcceptModal() {
+    document.getElementById("acceptModal").style.display = "none";
+}
+
+function closeDeclineModal() {
     document.getElementById("declineModal").style.display = "none";
 }
 
 // Close modal when clicking outside of it
 window.onclick = function(event) {
-    const modal = document.getElementById("declineModal");
-    if (event.target == modal) {
-        modal.style.display = "none";
+    const acceptModal = document.getElementById("acceptModal");
+    const declineModal = document.getElementById("declineModal");
+    
+    if (event.target == acceptModal) {
+        acceptModal.style.display = "none";
+    }
+    if (event.target == declineModal) {
+        declineModal.style.display = "none";
     }
 }
 
