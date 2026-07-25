@@ -158,6 +158,14 @@ body::after {
     text-transform: uppercase;
 }
 
+.timezone-note {
+    color: #d4af37;
+    font-size: 12px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    font-style: italic;
+}
+
 .countdown-timer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
@@ -625,6 +633,11 @@ button.secondary:hover:not(:disabled) {
         margin-bottom: 12px;
     }
 
+    .timezone-note {
+        font-size: 11px;
+        margin-bottom: 8px;
+    }
+
     .countdown-timer {
         gap: 10px;
     }
@@ -759,6 +772,11 @@ button.secondary:hover:not(:disabled) {
     .countdown-title {
         font-size: 16px;
         margin-bottom: 12px;
+    }
+
+    .timezone-note {
+        font-size: 10px;
+        margin-bottom: 8px;
     }
 
     .countdown-timer {
@@ -920,6 +938,7 @@ button.secondary:hover:not(:disabled) {
 <!-- Countdown Banner -->
 <div class="countdown-banner">
     <div class="countdown-title">🎂 Julie's 60th Birthday Countdown 🎂</div>
+    <div class="timezone-note">⏰ Philippine Time (PHT)</div>
     <div class="countdown-timer">
         <div class="countdown-box">
             <div class="countdown-number" id="days">0</div>
@@ -1180,15 +1199,24 @@ button.secondary:hover:not(:disabled) {
 
 <script>
 
-// Countdown Timer
+// Countdown Timer in Philippine Time (PHT)
 function updateCountdown() {
-    // Set target date: August 17, 2026 at 2:00 PM
-    const targetDate = new Date('August 17, 2026 14:00:00').getTime();
+    // Set target date: August 17, 2026 at 2:00 PM Philippine Time
+    // Philippine Time is UTC+8
+    const targetDate = new Date('August 17, 2026 14:00:00 UTC+0800').getTime();
     
     // Update countdown every second
     const countdownInterval = setInterval(() => {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
+        // Get current time in Philippine Time
+        const now = new Date();
+        const phtTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Manila' }));
+        const currentTime = phtTime.getTime();
+        
+        // Create target date in Philippine timezone
+        const target = new Date(new Date('August 17, 2026 14:00:00').toLocaleString('en-US', { timeZone: 'Asia/Manila' }));
+        const targetTime = target.getTime();
+        
+        const distance = targetTime - currentTime;
         
         // Calculate time units
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
