@@ -123,6 +123,88 @@ body::after {
     }
 }
 
+/* Countdown Banner */
+.countdown-banner {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
+    border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+    padding: 25px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
+    animation: slideDownBanner 0.6s ease-out;
+}
+
+@keyframes slideDownBanner {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.countdown-title {
+    color: #d4af37;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.countdown-timer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 12px;
+    justify-content: center;
+}
+
+.countdown-box {
+    background: linear-gradient(135deg, rgba(245, 245, 245, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    padding: 15px 10px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+    transition: all 0.3s ease;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.countdown-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
+    border-color: rgba(212, 175, 55, 0.6);
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2); }
+    50% { box-shadow: 0 8px 30px rgba(212, 175, 55, 0.35); }
+}
+
+.countdown-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: #d4af37;
+    font-family: 'Arial', sans-serif;
+    line-height: 1;
+}
+
+.countdown-label {
+    font-size: 12px;
+    color: #666;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 /* Modal styles */
 .modal {
     display: none;
@@ -533,6 +615,33 @@ button.secondary:hover:not(:disabled) {
         padding: 15px;
     }
 
+    .countdown-banner {
+        padding: 20px 15px;
+        margin-bottom: 25px;
+    }
+
+    .countdown-title {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    .countdown-timer {
+        gap: 10px;
+    }
+
+    .countdown-box {
+        padding: 12px 8px;
+    }
+
+    .countdown-number {
+        font-size: 28px;
+    }
+
+    .countdown-label {
+        font-size: 11px;
+        margin-top: 6px;
+    }
+
     .card {
         padding: 35px 20px;
         max-width: 100%;
@@ -640,6 +749,34 @@ button.secondary:hover:not(:disabled) {
     body {
         padding: 12px;
         min-height: auto;
+    }
+
+    .countdown-banner {
+        padding: 18px 12px;
+        margin-bottom: 20px;
+    }
+
+    .countdown-title {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .countdown-timer {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .countdown-box {
+        padding: 12px 8px;
+    }
+
+    .countdown-number {
+        font-size: 24px;
+    }
+
+    .countdown-label {
+        font-size: 10px;
+        margin-top: 5px;
     }
 
     .card {
@@ -778,6 +915,29 @@ button.secondary:hover:not(:disabled) {
     <div class="floating-item">💫</div>
     <div class="floating-item">🎗️</div>
     <div class="floating-item">🏵️</div>
+</div>
+
+<!-- Countdown Banner -->
+<div class="countdown-banner">
+    <div class="countdown-title">🎂 Julie's 60th Birthday Countdown 🎂</div>
+    <div class="countdown-timer">
+        <div class="countdown-box">
+            <div class="countdown-number" id="days">0</div>
+            <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-box">
+            <div class="countdown-number" id="hours">0</div>
+            <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-box">
+            <div class="countdown-number" id="minutes">0</div>
+            <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-box">
+            <div class="countdown-number" id="seconds">0</div>
+            <div class="countdown-label">Seconds</div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal for Accept Message -->
@@ -1019,6 +1179,42 @@ button.secondary:hover:not(:disabled) {
 </div>
 
 <script>
+
+// Countdown Timer
+function updateCountdown() {
+    // Set target date: August 17, 2026 at 2:00 PM
+    const targetDate = new Date('August 17, 2026 14:00:00').getTime();
+    
+    // Update countdown every second
+    const countdownInterval = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        
+        // Calculate time units
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Display values
+        document.getElementById('days').textContent = days.toString().padStart(2, '0');
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        
+        // If countdown ends
+        if (distance < 0) {
+            clearInterval(countdownInterval);
+            document.getElementById('days').textContent = '00';
+            document.getElementById('hours').textContent = '00';
+            document.getElementById('minutes').textContent = '00';
+            document.getElementById('seconds').textContent = '00';
+        }
+    }, 1000);
+}
+
+// Start countdown on page load
+window.addEventListener('load', updateCountdown);
 
 function acceptInvite() {
     // Show the accept modal
