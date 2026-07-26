@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're Invited — Julie Barcebal's 60th Birthday</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Playfair Display', 'Georgia', serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: visible;
+    flex-direction: column;
+}
+
+/* Animated background elements */
+body::before {
+    content: '';
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    top: -100px;
+    left: -100px;
+    animation: float 8s ease-in-out infinite;
+    z-index: 0;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    bottom: -50px;
+    right: -50px;
+    animation: float 10s ease-in-out infinite reverse;
+    z-index: 0;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(30px); }
+}
+
+/* Floating decorative elements */
+.decorative-container {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-item {
+    position: absolute;
+    font-size: 30px;
+    opacity: 0.6;
+    animation: float-gentle 6s ease-in-out infinite;
+}
+
+@keyframes float-gentle {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(10deg); }
+}
+
+/* Stagger animations for each element */
+.floating-item:nth-child(1) { animation-delay: 0s; left: 5%; top: 10%; }
+.floating-item:nth-child(2) { animation-delay: 0.5s; right: 8%; top: 15%; }
+.floating-item:nth-child(3) { animation-delay: 1s; left: 10%; top: 60%; }
+.floating-item:nth-child(4) { animation-delay: 1.5s; right: 5%; top: 70%; }
+.floating-item:nth-child(5) { animation-delay: 2s; left: 15%; top: 30%; }
+.floating-item:nth-child(6) { animation-delay: 2.5s; right: 12%; top: 40%; }
+.floating-item:nth-child(7) { animation-delay: 3s; left: 8%; bottom: 20%; }
+.floating-item:nth-child(8) { animation-delay: 3.5s; right: 10%; bottom: 15%; }
+.floating-item:nth-child(9) { animation-delay: 4s; left: 20%; top: 50%; }
+.floating-item:nth-child(10) { animation-delay: 4.5s; right: 20%; top: 25%; }
+
+/* More floating items */
+.floating-item:nth-child(11) { animation-delay: 0.3s; left: 12%; top: 80%; }
+.floating-item:nth-child(12) { animation-delay: 0.8s; right: 15%; top: 85%; }
+.floating-item:nth-child(13) { animation-delay: 1.3s; left: 25%; top: 20%; }
+.floating-item:nth-child(14) { animation-delay: 1.8s; right: 3%; top: 50%; }
+.floating-item:nth-child(15) { animation-delay: 2.3s; left: 30%; top: 65%; }
+.floating-item:nth-child(16) { animation-delay: 2.8s; right: 25%; top: 35%; }
+.floating-item:nth-child(17) { animation-delay: 3.3s; left: 5%; top: 40%; }
+.floating-item:nth-child(18) { animation-delay: 3.8s; right: 8%; bottom: 25%; }
+.floating-item:nth-child(19) { animation-delay: 4.3s; left: 18%; bottom: 10%; }
+.floating-item:nth-child(20) { animation-delay: 4.8s; right: 30%; top: 60%; }
+
+/* Confetti animation */
+.confetti {
+    position: fixed;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes confetti-fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+    margin: auto;
+    padding: 40px 30px;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(212, 175, 55, 0.4);
+    max-width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translate(-50%, -40%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    color: #d4af37;
+    font-size: 28px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.modal-content p {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modal-emoji {
+    font-size: 50px;
+    margin-bottom: 15px;
+    display: inline-block;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.modal-close-btn {
+    background: linear-gradient(135deg, #d4af37 0%, #f1e5ac 100%);
+    color: #1a1a2e;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 10px;
+}
+
+.modal-close-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.5);
+    background: linear-gradient(135deg, #f1e5ac 0%, #d4af37 100%);
+}
+
+.modal-close-btn:active {
+    transform: translateY(-1px);
+}
+
+.card {
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+    width: 100%;
+    max-width: 750px;
+    border-radius: 25px;
+    padding: 40px 25px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(212, 175, 55, 0.3), 0 0 60px rgba(212, 175, 55, 0.1);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    position: relative;
+    z-index: 1;
+    margin: auto;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #d4af37 0%, #f1e5ac 50%, #d4af37 100%);
+    border-radius: 25px;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+/* Decorative top ornament */
+.ornament-top {
+    font-size: 45px;
+    margin-bottom: 15px;
+    animation: wobble 3s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes wobble {
+    0%, 100% { transform: rotate(-2deg) scale(1); }
+    50% { transform: rotate(2deg) scale(1.1); }
+}
+
+h1 {
+    color: #d4af37;
+    font-size: 42px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    color: #d4af37;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.divider {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    margin: 25px auto;
+}
+
+.description {
+    color: #333;
+    font-size: 16px;
+    margin: 25px 0;
+    line-height: 1.7;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.details {
+    text-align: left;
+    margin: 35px 0;
+    line-height: 2.2;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+    padding: 12px 15px;
+    background: rgba(212, 175, 55, 0.08);
+    border-left: 3px solid #d4af37;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+    background: rgba(212, 175, 55, 0.15);
+    transform: translateX(5px);
+}
+
+.detail-icon {
+    font-size: 22px;
+    margin-right: 15px;
+    color: #d4af37;
+    flex-shrink: 0;
+}
+
+.detail-text {
+    color: #333;
+    font-size: 14px;
+}
+
+.detail-text strong {
+    color: #d4af37;
+    font-weight: 600;
+}
+
+/* Inviters Section */
+.inviters-section {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 30px 0;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.inviters-title {
+    color: #d4af37;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.inviters-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    font-size: 12px;
+}
+
+.inviter-badge {
+    background: white;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border-left: 3px solid #d4af37;
+    color: #333;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    word-break: break-word;
+    font-weight: 500;
+}
+
+.inviter-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+    background: rgba(212, 175, 55, 0.05);
+}
+
+.section-subtitle {
+    color: #d4af37;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+button {
+    background: linear-gradient(135deg, #d4af37 0%, #f1e5ac 100%);
+    color: #1a1a2e;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-width: 140px;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.5);
+    background: linear-gradient(135deg, #f1e5ac 0%, #d4af37 100%);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+button.secondary {
+    background: transparent;
+    border: 2px solid #d4af37;
+    color: #d4af37;
+    box-shadow: none;
+}
+
+button.secondary:hover:not(:disabled) {
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+}
+
+#message {
+    margin-top: 18px;
+    color: #d4af37;
+    font-weight: bold;
+    font-size: 16px;
+    animation: slideIn 0.5s ease;
+    min-height: 24px;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer-note {
+    margin-top: 20px;
+    color: #999;
+    font-size: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .card {
+        padding: 35px 20px;
+        max-width: 100%;
+        border-radius: 20px;
+        width: auto;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        padding: 30px 20px;
+    }
+
+    .modal-content h2 {
+        font-size: 24px;
+    }
+
+    .modal-content p {
+        font-size: 16px;
+    }
+
+    .modal-emoji {
+        font-size: 40px;
+    }
+
+    h1 {
+        font-size: 36px;
+        margin-bottom: 6px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .ornament-top {
+        font-size: 40px;
+        margin-bottom: 12px;
+    }
+
+    .description {
+        font-size: 15px;
+        margin: 20px 0;
+    }
+
+    .details {
+        font-size: 14px;
+        line-height: 2;
+        margin: 25px 0;
+    }
+
+    .detail-item {
+        padding: 10px 12px;
+        margin: 10px 0;
+    }
+
+    .detail-icon {
+        font-size: 20px;
+        margin-right: 12px;
+    }
+
+    .detail-text {
+        font-size: 13px;
+    }
+
+    .inviters-section {
+        padding: 15px;
+        margin: 25px 0;
+    }
+
+    .inviters-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .inviter-badge {
+        font-size: 11px;
+        padding: 8px 10px;
+    }
+
+    .section-subtitle {
+        font-size: 12px;
+        margin-top: 12px;
+        margin-bottom: 8px;
+    }
+
+    .buttons-container {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px 30px;
+        font-size: 14px;
+        min-width: unset;
+    }
+
+    .footer-note {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 12px;
+        min-height: auto;
+    }
+
+    .card {
+        padding: 28px 16px;
+        border-radius: 18px;
+        width: 100%;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        padding: 25px 18px;
+    }
+
+    .modal-content h2 {
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+
+    .modal-content p {
+        font-size: 15px;
+        margin-bottom: 18px;
+    }
+
+    .modal-emoji {
+        font-size: 36px;
+        margin-bottom: 12px;
+    }
+
+    .modal-close-btn {
+        padding: 11px 35px;
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    .ornament-top {
+        font-size: 36px;
+    }
+
+    .divider {
+        width: 80px;
+    }
+
+    .description {
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 18px 0;
+    }
+
+    .details {
+        font-size: 13px;
+        line-height: 1.9;
+        margin: 20px 0;
+    }
+
+    .detail-item {
+        padding: 10px;
+        margin: 8px 0;
+    }
+
+    .detail-icon {
+        font-size: 18px;
+        margin-right: 10px;
+    }
+
+    .inviters-title {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .inviters-list {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .inviter-badge {
+        font-size: 11px;
+        padding: 7px 8px;
+    }
+
+    .section-subtitle {
+        font-size: 11px;
+        margin-top: 10px;
+        margin-bottom: 6px;
+    }
+
+    .buttons-container {
+        margin-top: 25px;
+        gap: 8px;
+        width: 100%;
+    }
+
+    button {
+        padding: 12px 20px;
+        font-size: 13px;
+        width: 100%;
+    }
+
+    #message {
+        font-size: 14px;
+        margin-top: 15px;
+    }
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- Decorative floating elements -->
+<div class="decorative-container">
+    <div class="floating-item">🎉</div>
+    <div class="floating-item">💙</div>
+    <div class="floating-item">🌸</div>
+    <div class="floating-item">🎁</div>
+    <div class="floating-item">✨</div>
+    <div class="floating-item">🎊</div>
+    <div class="floating-item">🎂</div>
+    <div class="floating-item">💐</div>
+    <div class="floating-item">🎈</div>
+    <div class="floating-item">⭐</div>
+    <div class="floating-item">🌹</div>
+    <div class="floating-item">🎀</div>
+    <div class="floating-item">💝</div>
+    <div class="floating-item">🌺</div>
+    <div class="floating-item">🥳</div>
+    <div class="floating-item">🎪</div>
+    <div class="floating-item">🌼</div>
+    <div class="floating-item">💫</div>
+    <div class="floating-item">🎗️</div>
+    <div class="floating-item">🏵️</div>
+</div>
+
+<!-- Modal for Decline Message -->
+<div id="declineModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-emoji">😊</div>
+        <h2>We'll Miss You!</h2>
+        <p>Hope to celebrate with you in another time 🎉</p>
+        <button class="modal-close-btn" onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+<div class="card">
+
+    <div class="ornament-top">✨🎉✨</div>
+
+    <h1>You're Invited</h1>
+    <div class="subtitle">to a Celebration</div>
+
+    <div class="divider"></div>
+
+    <p class="description">
+        Please join us to celebrate Julie Barcebal on her 60th birthday. 
+        We would be delighted to have you share this special milestone with Julie — an afternoon of joy and togetherness.
+    </p>
+
+    <div class="details">
+
+        <div class="detail-item">
+            <span class="detail-icon">🎉</span>
+            <div class="detail-text">
+                <strong>Celebrant:</strong> Julie Barcebal
+            </div>
+        </div>
+        
+        <div class="detail-item">
+            <span class="detail-icon">🎂</span>
+            <div class="detail-text">
+                <strong>Occasion:</strong> 60th Birthday Celebration
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-icon">📅</span>
+            <div class="detail-text">
+                <strong>Date:</strong> August 17, 2026
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-icon">🕐</span>
+            <div class="detail-text">
+                <strong>Time:</strong> 2:00 PM
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-icon">📍</span>
+            <div class="detail-text">
+                <strong>Venue:</strong> Sitio Barutbutan, Balingayan, Julie's Residence
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-icon">👕</span>
+            <div class="detail-text">
+                <strong>Dress Code:</strong> Casual
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Inviters Section -->
+    <div class="inviters-section">
+        <div class="inviters-title">💌 With Love From</div>
+        
+        <div class="section-subtitle"> KITCHENWARE </div>
+        <div class="inviters-list">
+            <div class="inviter-badge"> Sandro Turalba </div>
+            <div class="inviter-badge"> Efren Turalba </div>
+            <div class="inviter-badge"> Nicco Turalba </div>
+
+<div class="inviter-badge"> Val Turalba </div>
+
+<div class="inviter-badge"> Elmer Dalisay </div>
+
+<div class="inviter-badge"> Benedict Panopio </div>
+
+<div class="inviter-badge"> Mark Oliver Oliva</div>
+
+<div class="inviter-badge"> Rodel Ruiz </div>
+
+<div class="inviter-badge"> Richard Placido </div>
+
+<div class="inviter-badge"> Ambal </div>
+       </div>
+
+        <div class="section-subtitle"> PILLOWS </div>
+        <div class="inviters-list">
+            <div class="inviter-badge"> Mina Almanon </div>
+            <div class="inviter-badge"> Eva Marasigan</div>
+            <div class="inviter-badge">Tinay  Datinggaling </div>
+            <div class="inviter-badge"> Feh Mortella </div>
+            <div class="inviter-badge"> Tita Mortella </div>
+            <div class="inviter-badge"> Gloria Evangelista </div>
+        </div>
+
+<div class="section-subtitle"> CAKES </div>
+        <div class="inviters-list">
+            <div class="inviter-badge"> Emily Hernandez </div>
+            <div class="inviter-badge"> Malou Umali </div>
+            <div class="inviter-badge">  Auring Marasigan </div>
+            <div class="inviter-badge"> Lester Umali </div>
+            <div class="inviter-badge"> Charity Carenan </div>
+            <div class="inviter-badge"> Jovith Velasco </div>
+        </div>
+
+
+<div class="section-subtitle"> SLING BAG </div>
+        <div class="inviters-list">
+            <div class="inviter-badge"> Rosie Barcebal </div>
+            <div class="inviter-badge"> Dalen Barcebal </div>
+            <div class="inviter-badge">  Lolith Barcebal </div>
+            <div class="inviter-badge"> Aireen Mortella </div>
+            <div class="inviter-badge"> Nora Evangelista </div>
+            <div class="inviter-badge"> Glecy Arida </div>
+        </div>
+
+<div class="section-subtitle"> TOWELS </div>
+        <div class="inviters-list">
+            <div class="inviter-badge"> Kon. Joseph Arellano </div>
+            <div class="inviter-badge"> Odette Badillo </div>
+            <div class="inviter-badge">  Nelia Lualhati </div>
+            <div class="inviter-badge"> Asang Evangelista </div>
+            <div class="inviter-badge"> Cay Umali </div>
+            <div class="inviter-badge"> Sima Almoneda </div>
+        </div>
+
+<div class="section-subtitle"> COLOGNES </div>
+        <div class="inviters-list">
+            <div class="inviter-badge"> Gloria Coliflores </div>
+            <div class="inviter-badge"> Gina Ramirez </div>
+            <div class="inviter-badge">  Merly Ilar </div>
+            <div class="inviter-badge"> Bheng Matibag </div>
+            <div class="inviter-badge"> Marie Dapito </div>
+            <div class="inviter-badge"> Marie Almoneda </div>
+        </div>
+
+<div class="section-subtitle"> SLIPPERS </div>
+        <div class="inviters-list">
+            <div class="inviter-badge"> Kaycell Almanon </div>
+            <div class="inviter-badge"> Judy Marasigan </div>
+            <div class="inviter-badge">  Meding Decena </div>
+            <div class="inviter-badge"> Thildy Rizo </div>
+            <div class="inviter-badge"> Sherly Cezar </div>
+            <div class="inviter-badge"> Caitlyn Barcebal </div>
+        </div>
+
+<div class="section-subtitle"> MUGS </div>
+        <div class="inviters-list">
+            <div class="inviter-badge"> Emma E. Marasigan </div>
+            <div class="inviter-badge"> Eva Mortella </div>
+            <div class="inviter-badge">  Thess Matining </div>
+            <div class="inviter-badge"> Nelia Cantupay </div>
+            <div class="inviter-badge"> Caren Mauro </div>
+            <div class="inviter-badge"> Edelyn Abrigo </div>
+        </div>
+
+<div class="section-subtitle"> TERNO PAMBAHAY </div>
+        <div class="inviters-list">
+            <div class="inviter-badge"> Josie Grantoza </div>
+            <div class="inviter-badge"> Ada Marasigan </div>
+            <div class="inviter-badge">  Sixta Catoy </div>
+            <div class="inviter-badge"> Yolly Bagus </div>
+            <div class="inviter-badge"> Vina Lazarte </div>
+            <div class="inviter-badge"> Dorie Marasigan </div>
+        </div>
+
+<div class="section-subtitle"> BILLS </div>
+        <div class="inviters-list">
+            <div class="inviter-badge"> Leah Barcebal </div>
+            <div class="inviter-badge"> Misty & Mark Arida </div>
+            <div class="inviter-badge">  Carlo & Jane Bacebal </div>
+            <div class="inviter-badge"> Kim & Jehd Badillo </div>
+            <div class="inviter-badge"> Rayray & Ray Diala </div>
+            <div class="inviter-badge"> Jessa Barcebal & Aljon Villanueva </div>
+  <div class="inviter-badge"> Arbie & Jam Barcebal </div>
+  <div class="inviter-badge"> Leo & Chen Barcebal </div>
+
+        </div>
+
+        <div class="section-subtitle"> Perfumes div>
+        <div class="inviters-list">
+           
+            <div class="inviter-badge"> Carina Encarnacion </div>
+            <div class="inviter-badge"> Rachelle Marasigan </div>
+        <div class="inviter-badge"> Raerae Evangelista </div>
+<div class="inviter-badge"> Nonai Decena </div> <div class="inviter-badge"> Carl Barcebal </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="buttons-container">
+        <button onclick="acceptInvite()">Accept Invitation</button>
+        <button class="secondary" onclick="declineInvite()">Decline</button>
+    </div>
+
+    <p id="message"></p>
+
+    <p class="footer-note">
+        RSVP by August 10, 2026
+    </p>
+
+</div>
+
+<script>
+
+function acceptInvite() {
+    document.getElementById("message").innerHTML = 
+    "✨ Thank you! We look forward to seeing you. ✨";
+    
+    // Disable button
+    event.target.disabled = true;
+    createConfetti();
+}
+
+function declineInvite() {
+    // Show the modal instead of displaying a message at the bottom
+    document.getElementById("declineModal").style.display = "block";
+    
+    // Disable buttons
+    document.querySelectorAll('.buttons-container button').forEach(btn => {
+        btn.disabled = true;
+    });
+}
+
+function closeModal() {
+    document.getElementById("declineModal").style.display = "none";
+}
+
+// Close modal when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById("declineModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+function createConfetti() {
+    const emojis = ['🎉', '🎊', '✨', '💙', '🎁', '🎈', '⭐', '🌟'];
+    
+    for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = '-50px';
+        confetti.style.fontSize = (Math.random() * 20 + 20) + 'px';
+        confetti.style.animation = `confetti-fall ${Math.random() * 2 + 2.5}s linear forwards`;
+        
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => confetti.remove(), 3000);
+    }
+}
+
+// Prevent default touch behaviors
+document.addEventListener('touchmove', function(e) {
+    // Allow normal scrolling on the page
+}, { passive: true });
+
+</script>
+
+</body>
+</html>
