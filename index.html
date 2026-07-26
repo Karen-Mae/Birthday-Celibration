@@ -1051,8 +1051,8 @@ button.secondary:hover:not(:disabled) {
             <div class="inviter-badge">Val Turalba</div>
             <div class="inviter-badge">Elmwr Dalisay</div>
             <div class="inviter-badge">Benedict Panopio</div>
-            <div class="inviter-badge">Mac Olivia</div>
-            <div class="inviter-badge">Rodel</div>
+            <div class="inviter-badge">Mark Oliver Oliva</div>
+            <div class="inviter-badge">Rhodel Ruiz</div>
             <div class="inviter-badge">Richard Placido</div>
             <div class="inviter-badge">Ambal</div>
         </div>
@@ -1238,41 +1238,41 @@ function closeDeclineModal() {
     document.getElementById("declineModal").style.display = "none";
 }
 
-// Close modal when clicking outside of it
+// Confetti creation function
+function createConfetti() {
+    const confettiPieces = 50;
+    for (let i = 0; i < confettiPieces; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.textContent = ['🎉', '🎊', '✨', '🎈', '💙', '🎁'][Math.floor(Math.random() * 6)];
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        confetti.style.animation = `confetti-fall ${(Math.random() * 2 + 2)}s ease-in forwards`;
+        document.body.appendChild(confetti);
+        
+        // Remove confetti after animation
+        setTimeout(() => confetti.remove(), 4000);
+    }
+}
+
+// Close modals when clicking outside of them
 window.onclick = function(event) {
     const acceptModal = document.getElementById("acceptModal");
     const declineModal = document.getElementById("declineModal");
     
-    if (event.target == acceptModal) {
+    if (event.target === acceptModal) {
         acceptModal.style.display = "none";
+        document.querySelectorAll('.buttons-container button').forEach(btn => {
+            btn.disabled = false;
+        });
     }
-    if (event.target == declineModal) {
+    if (event.target === declineModal) {
         declineModal.style.display = "none";
+        document.querySelectorAll('.buttons-container button').forEach(btn => {
+            btn.disabled = false;
+        });
     }
 }
-
-function createConfetti() {
-    const emojis = ['🎉', '🎊', '✨', '💙', '🎁', '🎈', '⭐', '🌟'];
-    
-    for (let i = 0; i < 30; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.top = '-50px';
-        confetti.style.fontSize = (Math.random() * 20 + 20) + 'px';
-        confetti.style.animation = `confetti-fall ${Math.random() * 2 + 2.5}s linear forwards`;
-        
-        document.body.appendChild(confetti);
-        
-        setTimeout(() => confetti.remove(), 3000);
-    }
-}
-
-// Prevent default touch behaviors
-document.addEventListener('touchmove', function(e) {
-    // Allow normal scrolling on the page
-}, { passive: true });
 
 </script>
 
